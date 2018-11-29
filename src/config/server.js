@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const morgan= require('morgan');
 const newsRoutes= require('../app/routes/news');
 
+
 const app = express();
 const session = require('express-session');
 const userRoutes = require('../app/routes/users');

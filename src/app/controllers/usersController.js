@@ -11,6 +11,22 @@ res.render('index',{message: message});
 
 
 //Controlador para que el usuario se registre
+controller.signup = (req,res)=>{
+    const {first_name,last_name,user_name, password} =req.body;
+    
+        conn.query('INSERT INTO users SET ? ',
+    {
+    first_name,
+    last_name,
+    user_name,
+    password
+    } ,(err,result)=>{
+        res.redirect('/ir2');
+    });
+    };
+
+
+    /*Controlador para que el usuario se registre
 controller.signup = (req, res)=>{
 
     message = '';
@@ -30,12 +46,11 @@ controller.signup = (req, res)=>{
        
         }); 
     } else {
-        res.render('signup');
+        res.render('/ir2');
         }
        
 
-};   
- 
+}; */
 
 //Controlador para el Inicio de sesión
 controller.login = (req, res)=>{
@@ -105,6 +120,30 @@ controller.ir = (req, res, next)=>{
             }
         res.render ('news', {
             news:result
+        
+        });
+        });
+    }
+
+
+};
+
+
+controller.ir2 = (req, res, next)=>{
+
+    var user = req.session.user,
+    userId = req.session.userId;
+   
+    if(userId == null){
+    res.redirect("/login");
+    return;
+    }else{
+        conn.query('SELECT * FROM users', (err, result)=>{
+            if(err){
+                res.json(err);
+            }
+        res.render ('users', {
+            users:result
         
         });
         });

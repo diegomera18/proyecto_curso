@@ -43,6 +43,24 @@ controller.add = (req,res)=>{
         };
 
 
+
+        controller.actualizar = (req,res)=>{
+            const {title,news} =req.body;
+    
+            const id=req.params.id_noticia;
+                conn.query('DELETE from news where id_news = ?',
+           
+                id
+            
+            , (err,result)=>{
+                res.redirect('/news');
+            });
+            };
+
+
+            
+
+
         
 
 module.exports= controller;
